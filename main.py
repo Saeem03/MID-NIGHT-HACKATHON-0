@@ -83,10 +83,8 @@ def main():
     for x in xlsx_list:
         print(str(i) + " " + str(x))
         i += 1
-    # print(xlsx_list)
     xlsx_name = 'xlsx files/'+xlsx_list[0]
-    # print(xlsx_name)
-    data = pd.read_excel(xlsx_name)
+    data = pd.read_exce l(xlsx_name)
     image_file_name = 'Images/'+images[0]
     image_process_no_specification(data.iterrows(), image_file_name)
 
