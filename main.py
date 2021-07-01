@@ -23,7 +23,7 @@ def image_process(data, image_file_name, font_size, name_x, name_y, id_x, id_y, 
 
 
 # Inserts texts in the image
-def image_process(data, image_file_name, font_size=50, id_font_color='yellow', name_font_color='red'):
+def image_process_no_specification(data, image_file_name, font_size=50, id_font_color='yellow', name_font_color='red'):
     img = PIL.Image.open(image_file_name)
     id_x, id_y = img.size
     id_x /= 2
@@ -48,7 +48,7 @@ def image_process(data, image_file_name, font_size=50, id_font_color='yellow', n
 def get_all_images_from(folder_name):
     image_list = []
     valid_images = ["jpg", "png"]
-    for filename in os.listdir(str + '/'):
+    for filename in os.listdir(folder_name + '/'):
         ext = filename.split('.')[-1]
         if ext.lower() not in valid_images:
             continue
@@ -56,19 +56,39 @@ def get_all_images_from(folder_name):
     return image_list
 
 
+def get_all_xlsx_from(folder_name):
+    xlsx_files = []
+    valid_images = ["xlsx"]
+    for filename in os.listdir(folder_name + '//'):
+        ext = filename.split('.')[-1]
+        if ext.lower() not in valid_images:
+            continue
+        xlsx_files.append(filename)
+
+    return xlsx_files
+
+
 # Main function
 def main():
     images = get_all_images_from('Images')
     print("Image Files:")
-    print(images)
-    xlsx_name = "MidNightHackathon212.1.xlsx"
-    # data = pd.read_excel(xlsx_name)
-    # print(data)
-    # # for x, y in data.iterrows():
-    # #     print(y['Name'], '   ', y['Unique Id'])
-    # # print(image_list)
-    # image_file_name = 'Images/white.jpg'
-    # image_process(data.iterrows(), image_file_name)
+    i = 1;
+    for x in images:
+        print(str(i) + " " + str(x))
+        i += 1
+    # print(images)
+    xlsx_list = get_all_xlsx_from('xlsx files')
+    print("\nxlsx Files:")
+    i=1;
+    for x in xlsx_list:
+        print(str(i) + " " + str(x))
+        i += 1
+    # print(xlsx_list)
+    xlsx_name = 'xlsx files/'+xlsx_list[0]
+    # print(xlsx_name)
+    data = pd.read_excel(xlsx_name)
+    image_file_name = 'Images/'+images[0]
+    image_process_no_specification(data.iterrows(), image_file_name)
 
 
 # def import_images_with_heading_numbers
